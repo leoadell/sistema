@@ -6,15 +6,21 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule } from '@angular/material';
 import { FirstPageComponent } from './first-page/first-page.component';
 import { SecondPageComponent } from './second-page/second-page.component';
 import { ThirdPageComponent } from './third-page/third-page.component';
+import { ProductosComponent } from './productos/productos.component';
+import { ClientesComponent } from './clientes/clientes.component';
+import { ProveedoresComponent } from './proveedores/proveedores.component';
 
 const appRoutes: Routes=[
   {path:'first-page', component:FirstPageComponent},
   {path:'second-page', component:SecondPageComponent},
   {path:'third-page', component:ThirdPageComponent},
+  {path:'Productos', component:ProductosComponent},
+  {path:'Clientes', component:ClientesComponent},
+  {path:'Proveedores', component:ProveedoresComponent},
 ]
 
 @NgModule({
@@ -23,7 +29,10 @@ const appRoutes: Routes=[
     NavBarComponent,
     FirstPageComponent,
     SecondPageComponent,
-    ThirdPageComponent
+    ThirdPageComponent,
+    ProductosComponent,
+    ClientesComponent,
+    ProveedoresComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +43,8 @@ const appRoutes: Routes=[
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
