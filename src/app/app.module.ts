@@ -1,12 +1,26 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule } from '@angular/material';
+
+import {
+  MatToolbarModule,
+  MatButtonModule,
+  MatCheckboxModule,
+  MatSidenavModule,
+  MatIconModule,
+  MatListModule,
+  MatTableModule,
+  MatCardModule,
+  }
+  from '@angular/material';
+
+  import {MatFormFieldModule, MatFormFieldControl} from '@angular/material/form-field';
+
 import { FirstPageComponent } from './first-page/first-page.component';
 import { SecondPageComponent } from './second-page/second-page.component';
 import { ThirdPageComponent } from './third-page/third-page.component';
@@ -14,13 +28,13 @@ import { ProductosComponent } from './productos/productos.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
 
-const appRoutes: Routes=[
-  {path:'first-page', component:FirstPageComponent},
-  {path:'second-page', component:SecondPageComponent},
-  {path:'third-page', component:ThirdPageComponent},
-  {path:'Productos', component:ProductosComponent},
-  {path:'Clientes', component:ClientesComponent},
-  {path:'Proveedores', component:ProveedoresComponent},
+const appRoutes: Routes = [
+  { path: 'first-page', component: FirstPageComponent },
+  { path: 'second-page', component: SecondPageComponent },
+  { path: 'third-page', component: ThirdPageComponent },
+  { path: 'Productos', component: ProductosComponent },
+  { path: 'Clientes', component: ClientesComponent },
+  { path: 'Proveedores', component: ProveedoresComponent },
 ]
 
 @NgModule({
@@ -32,7 +46,7 @@ const appRoutes: Routes=[
     ThirdPageComponent,
     ProductosComponent,
     ClientesComponent,
-    ProveedoresComponent
+    ProveedoresComponent    
   ],
   imports: [
     BrowserModule,
@@ -42,9 +56,13 @@ const appRoutes: Routes=[
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
+    MatFormFieldModule, 
+    MatCheckboxModule,   
     MatIconModule,
     MatListModule,
-    MatCardModule
+    MatCardModule,
+    MatTableModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
