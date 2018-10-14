@@ -16,6 +16,8 @@ import {
   MatListModule,
   MatTableModule,
   MatCardModule,
+  MatSortModule,
+  MatPaginatorModule,
   }
   from '@angular/material';
 
@@ -62,7 +64,8 @@ const appRoutes: Routes = [
     MatListModule,
     MatCardModule,
     MatTableModule,
-    
+    MatSortModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
