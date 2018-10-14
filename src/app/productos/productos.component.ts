@@ -10,7 +10,7 @@ import {MatPaginator, MatTableDataSource, MatSort} from '@angular/material';
   styleUrls: ['./productos.component.css']
 })
 export class ProductosComponent {
-  displayedColumns = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns = ['position', 'name', 'precio', 'detalle'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   @ViewChild(MatSort) sort: MatSort;
@@ -31,34 +31,34 @@ export class ProductosComponent {
   }
 }
 
-export interface Element {
+export interface Producto {
   name: string;
   position: number;
-  weight: number;
-  symbol: string;
+  precio: number;
+  detalle: string;
 }
 
-const ELEMENT_DATA: Element[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-  {position: 11, name: 'Sodium', weight: 22.9897, symbol: 'Na'},
-  {position: 12, name: 'Magnesium', weight: 24.305, symbol: 'Mg'},
-  {position: 13, name: 'Aluminum', weight: 26.9815, symbol: 'Al'},
-  {position: 14, name: 'Silicon', weight: 28.0855, symbol: 'Si'},
-  {position: 15, name: 'Phosphorus', weight: 30.9738, symbol: 'P'},
-  {position: 16, name: 'Sulfur', weight: 32.065, symbol: 'S'},
-  {position: 17, name: 'Chlorine', weight: 35.453, symbol: 'Cl'},
-  {position: 18, name: 'Argon', weight: 39.948, symbol: 'Ar'},
-  {position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K'},
-  {position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca'},
+const ELEMENT_DATA: Producto[] = [
+  {position: 1, name: 'Hilo Nego', precio: 35, detalle: 'Hilo negro de 10mts'},
+  {position: 2, name: 'Elastico ancho', precio: 8, detalle: 'Elastico para bebe'},
+  {position: 3, name: 'Lithium', precio: 6.941, detalle: 'Li'},
+  {position: 4, name: 'Beryllium', precio: 9.0122, detalle: 'Be'},
+  {position: 5, name: 'Boron', precio: 10.811, detalle: 'B'},
+  {position: 6, name: 'Carbon', precio: 12.0107, detalle: 'C'},
+  {position: 7, name: 'Nitrogen', precio: 14.0067, detalle: 'N'},
+  {position: 8, name: 'Oxygen', precio: 15.9994, detalle: 'O'},
+  {position: 9, name: 'Fluorine', precio: 18.9984, detalle: 'F'},
+  {position: 10, name: 'Neon', precio: 20.1797, detalle: 'Ne'},
+  {position: 11, name: 'Sodium', precio: 22.9897, detalle: 'Na'},
+  {position: 12, name: 'Magnesium', precio: 24.305, detalle: 'Mg'},
+  {position: 13, name: 'Aluminum', precio: 26.9815, detalle: 'Al'},
+  {position: 14, name: 'Silicon', precio: 28.0855, detalle: 'Si'},
+  {position: 15, name: 'Phosphorus', precio: 30.9738, detalle: 'P'},
+  {position: 16, name: 'Sulfur', precio: 32.065, detalle: 'S'},
+  {position: 17, name: 'Chlorine', precio: 35.453, detalle: 'Cl'},
+  {position: 18, name: 'Argon', precio: 39.948, detalle: 'Ar'},
+  {position: 19, name: 'Potassium', precio: 39.0983, detalle: 'K'},
+  {position: 20, name: 'Calcium', precio: 40.078, detalle: 'Ca'},
 ];
 
 
