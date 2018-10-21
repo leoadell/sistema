@@ -1,5 +1,7 @@
-import {Component, ViewChild} from '@angular/core';
-import {MatPaginator, MatTableDataSource, MatSort} from '@angular/material';
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
+import { DataService } from '../data/data.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 /**
  * @title Table with sorting
@@ -9,12 +11,39 @@ import {MatPaginator, MatTableDataSource, MatSort} from '@angular/material';
   templateUrl: './productos.component.html',
   styleUrls: ['./productos.component.css']
 })
-export class ProductosComponent {
+export class ProductosComponent implements OnInit {
+
+  public productos: any;
+
   displayedColumns = ['position', 'name', 'precio', 'detalle'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  dataSource = new MatTableDataSource(this.productos);//ELEMENT_DATA);
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  public key = null;
+  public products = [];
+  public currentStatus = 1;
+  public newProductForm = new FormGroup({
+    nombre: new FormControl('', Validators.required),
+    url: new FormControl('', Validators.required),
+    id: new FormControl('')
+  });
+
+  constructor(
+    private ds: DataService
+  ) {
+    this.newProductForm.setValue({
+      key: '',
+      name: '',
+      position: 0,
+      precio: 0,
+      detalle: ''
+    });
+  }
+  ngOnInit() {
+    this.getProductsList();
+  }
 
   /**
    * Set the sort after the view init since this component will
@@ -24,41 +53,93 @@ export class ProductosComponent {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
+
+  getProductsList() {
+    this.ds.getProducts().subscribe((productSnapshot) => {
+      this.productos = [];
+      productSnapshot.forEach((productData: any) => {
+        this.productos.push({
+          id: productData.payload.doc.id,
+          data: productData.payload.doc.data()
+        });
+      });
+    });
+    // this.ds.getProducts().pipe(
+    //   map(changes =>
+    //         changes.map(p => ({ key: p.payload.key, ...p.payload.val() }))
+    //       )
+    //     ).subscribe(productos => {
+    //       this.productos = productos;
+    //     });
+
+    // this.ds.getProducts().snapshotChanges().pipe(
+    //   map(changes =>
+    //     changes.map(p => ({ key: p.payload.key, ...p.payload.val() }))
+    //   )
+    // ).subscribe(productos => {
+    //   this.productos = productos;
+    // });
+  }
+
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.dataSource.filter = filterValue;
   }
+
+  public newProduct(form, key = this.key) {
+    console.log('Status: ${this.currentStatus}');
+    let data = {
+      nombre: form.nombre,
+      precio: form.precio,
+      detalle: form.detalle
+    }
+    if (this.currentStatus == 1) {
+
+      this.ds.createProduct(data).then(() => {
+        console.log('Documento creado exitósamente!');
+        this.cleraForm();
+      }, (error) => {
+        console.error(error);
+      });
+    } else {
+      this.ds.updateProduct(key, data).then(() => {
+        this.currentStatus = 1;
+        this.cleraForm();
+        console.log('Documento editado exitosamente');
+      }, (error) => {
+        console.log(error);
+      });
+    }
+  }
+
+  private cleraForm() {
+    this.newProductForm.setValue({
+      nombre: '',
+      precio: 0.00,
+      detalle: ''
+    });
+  }
+
+  public editProduct(key) {
+    let editSubscribe = this.ds.getProduct(key).subscribe((product) => {
+      this.currentStatus = 2;
+      this.key = key;
+      this.newProductForm.setValue({
+        id: key,
+        nombre: product.payload.data().nombre,
+        precio: product.payload.data().precio,
+        detalle: product.payload.data().detalle
+      });
+      editSubscribe.unsubscribe();
+    });
+  }
+
+  public deleteProduct(documentId) {
+    this.ds.deleteProduct(documentId).then(() => {
+      console.log('Documento eliminado!');
+    }, (error) => {
+      console.error(error);
+    });
+  }
 }
-
-export interface Producto {
-  name: string;
-  position: number;
-  precio: number;
-  detalle: string;
-}
-
-const ELEMENT_DATA: Producto[] = [
-  {position: 1, name: 'Hilo Nego', precio: 35, detalle: 'Hilo negro de 10mts'},
-  {position: 2, name: 'Elastico ancho', precio: 8, detalle: 'Elastico para bebe'},
-  {position: 3, name: 'Lithium', precio: 6.941, detalle: 'Li'},
-  {position: 4, name: 'Beryllium', precio: 9.0122, detalle: 'Be'},
-  {position: 5, name: 'Boron', precio: 10.811, detalle: 'B'},
-  {position: 6, name: 'Carbon', precio: 12.0107, detalle: 'C'},
-  {position: 7, name: 'Nitrogen', precio: 14.0067, detalle: 'N'},
-  {position: 8, name: 'Oxygen', precio: 15.9994, detalle: 'O'},
-  {position: 9, name: 'Fluorine', precio: 18.9984, detalle: 'F'},
-  {position: 10, name: 'Neon', precio: 20.1797, detalle: 'Ne'},
-  {position: 11, name: 'Sodium', precio: 22.9897, detalle: 'Na'},
-  {position: 12, name: 'Magnesium', precio: 24.305, detalle: 'Mg'},
-  {position: 13, name: 'Aluminum', precio: 26.9815, detalle: 'Al'},
-  {position: 14, name: 'Silicon', precio: 28.0855, detalle: 'Si'},
-  {position: 15, name: 'Phosphorus', precio: 30.9738, detalle: 'P'},
-  {position: 16, name: 'Sulfur', precio: 32.065, detalle: 'S'},
-  {position: 17, name: 'Chlorine', precio: 35.453, detalle: 'Cl'},
-  {position: 18, name: 'Argon', precio: 39.948, detalle: 'Ar'},
-  {position: 19, name: 'Potassium', precio: 39.0983, detalle: 'K'},
-  {position: 20, name: 'Calcium', precio: 40.078, detalle: 'Ca'},
-];
-
-

@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { LayoutModule } from '@angular/cdk/layout';
 
+
 import {
   MatToolbarModule,
   MatButtonModule,
@@ -32,6 +33,13 @@ import { ThirdPageComponent } from './third-page/third-page.component';
 import { ProductosComponent } from './productos/productos.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
+
+
+import{AngularFireModule} from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+
+import {environment} from '../environments/environment';
+
 
 const appRoutes: Routes = [
   { path: 'first-page', component: FirstPageComponent },
@@ -71,6 +79,8 @@ const appRoutes: Routes = [
     MatPaginatorModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
