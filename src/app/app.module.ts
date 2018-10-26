@@ -21,11 +21,9 @@ import {
   MatPaginatorModule,
   MatInputModule,
   MatProgressSpinnerModule,
-  
-  }
+  MatFormFieldModule,
+}
   from '@angular/material';
-
-  import {MatFormFieldModule, MatFormFieldControl} from '@angular/material/form-field';
 
 import { FirstPageComponent } from './first-page/first-page.component';
 import { SecondPageComponent } from './second-page/second-page.component';
@@ -35,10 +33,11 @@ import { ClientesComponent } from './clientes/clientes.component';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
 
 
-import{AngularFireModule} from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireModule } from 'angularfire2';
+// import { AngularFireDatabaseModule } from 'angularfire2/database';
+import{AngularFirestoreModule} from 'angularfire2/firestore';
 
-import {environment} from '../environments/environment';
+import { environment } from '../environments/environment';
 
 
 const appRoutes: Routes = [
@@ -59,7 +58,7 @@ const appRoutes: Routes = [
     ThirdPageComponent,
     ProductosComponent,
     ClientesComponent,
-    ProveedoresComponent    
+    ProveedoresComponent
   ],
   imports: [
     BrowserModule,
@@ -69,8 +68,8 @@ const appRoutes: Routes = [
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
-    MatFormFieldModule, 
-    MatCheckboxModule,   
+    MatFormFieldModule,
+    MatCheckboxModule,
     MatIconModule,
     MatListModule,
     MatCardModule,
@@ -80,7 +79,8 @@ const appRoutes: Routes = [
     MatInputModule,
     MatProgressSpinnerModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule,
+    //AngularFireDatabaseModule,
+    AngularFirestoreModule.enablePersistence(),
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,7 +1,12 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
+import { Component, ViewChild } from '@angular/core';
+import { MatPaginator, MatTableDataSource, MatSort, MatDialog } from '@angular/material';
+import { Producto } from '../data/producto';
 import { DataService } from '../data/data.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { DataSource } from '@angular/cdk/table';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { Observable , Subject} from 'rxjs';
+import { map } from 'rxjs/operators';
+
 
 /**
  * @title Table with sorting
@@ -11,75 +16,32 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   templateUrl: './productos.component.html',
   styleUrls: ['./productos.component.css']
 })
-export class ProductosComponent implements OnInit {
 
-  public productos: any;
+export class ProductosComponent {
+ 
+  displayedColumns = ['posicion', 'nombre', 'precio', 'detalle'];
+  dataSource:MatTableDataSource<any>; 
+  //dataSource = new MatTableDataSource(ELEMENT_DATA);
+  constructor(private afs: AngularFirestore) { }
 
-  displayedColumns = ['position', 'name', 'precio', 'detalle'];
-  dataSource = new MatTableDataSource(this.productos);//ELEMENT_DATA);
-
+ 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  public key = null;
-  public products = [];
-  public currentStatus = 1;
-  public newProductForm = new FormGroup({
-    nombre: new FormControl('', Validators.required),
-    url: new FormControl('', Validators.required),
-    id: new FormControl('')
-  });
-
-  constructor(
-    private ds: DataService
-  ) {
-    this.newProductForm.setValue({
-      key: '',
-      name: '',
-      position: 0,
-      precio: 0,
-      detalle: ''
-    });
-  }
-  ngOnInit() {
-    this.getProductsList();
-  }
-
   /**
-   * Set the sort after the view init since this component will
-   * be able to query its view for the initialized sort.
-   */
+  * Set the sort after the view init since this component will
+  * be able to query its view for the initialized sort.
+  */
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
 
-  getProductsList() {
-    this.ds.getProducts().subscribe((productSnapshot) => {
-      this.productos = [];
-      productSnapshot.forEach((productData: any) => {
-        this.productos.push({
-          id: productData.payload.doc.id,
-          data: productData.payload.doc.data()
-        });
-      });
-    });
-    // this.ds.getProducts().pipe(
-    //   map(changes =>
-    //         changes.map(p => ({ key: p.payload.key, ...p.payload.val() }))
-    //       )
-    //     ).subscribe(productos => {
-    //       this.productos = productos;
-    //     });
+      this.afs.collection<any>('products').valueChanges().subscribe(data => {
+        this.dataSource = new MatTableDataSource(data); 
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      })
+    }
 
-    // this.ds.getProducts().snapshotChanges().pipe(
-    //   map(changes =>
-    //     changes.map(p => ({ key: p.payload.key, ...p.payload.val() }))
-    //   )
-    // ).subscribe(productos => {
-    //   this.productos = productos;
-    // });
-  }
+
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -87,59 +49,68 @@ export class ProductosComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
-  public newProduct(form, key = this.key) {
-    console.log('Status: ${this.currentStatus}');
-    let data = {
-      nombre: form.nombre,
-      precio: form.precio,
-      detalle: form.detalle
-    }
-    if (this.currentStatus == 1) {
+  // openDialog(data): void {
+  //   const dialogRef = this.dialog.open(EditDialogComponent, {
+  //     width: '350px',
+  //     data: data
+  //   });
+  // }
 
-      this.ds.createProduct(data).then(() => {
-        console.log('Documento creado exitósamente!');
-        this.cleraForm();
-      }, (error) => {
-        console.error(error);
+
+}
+
+
+
+const ELEMENT_DATA: Producto[] = [
+  { posicion: 1, nombre: 'Hilo Nego', precio: 35, detalle: 'Hilo negro de 10mts' },
+  { posicion: 2, nombre: 'Elastico ancho', precio: 8, detalle: 'Elastico para bebe' },
+  { posicion: 3, nombre: 'Lithium', precio: 6.941, detalle: 'Li' },
+  { posicion: 4, nombre: 'Beryllium', precio: 9.0122, detalle: 'Be' },
+  { posicion: 5, nombre: 'Boron', precio: 10.811, detalle: 'B' },
+  { posicion: 6, nombre: 'Carbon', precio: 12.0107, detalle: 'C' },
+  { posicion: 7, nombre: 'Nitrogen', precio: 14.0067, detalle: 'N' },
+  { posicion: 8, nombre: 'Oxygen', precio: 15.9994, detalle: 'O' },
+  { posicion: 9, nombre: 'Fluorine', precio: 18.9984, detalle: 'F' },
+  { posicion: 10, nombre: 'Neon', precio: 20.1797, detalle: 'Ne' },
+  { posicion: 11, nombre: 'Sodium', precio: 22.9897, detalle: 'Na' },
+  { posicion: 12, nombre: 'Magnesium', precio: 24.305, detalle: 'Mg' },
+  { posicion: 13, nombre: 'Aluminum', precio: 26.9815, detalle: 'Al' },
+  { posicion: 14, nombre: 'Silicon', precio: 28.0855, detalle: 'Si' },
+  { posicion: 15, nombre: 'Phosphorus', precio: 30.9738, detalle: 'P' },
+  { posicion: 16, nombre: 'Sulfur', precio: 32.065, detalle: 'S' },
+  { posicion: 17, nombre: 'Chlorine', precio: 35.453, detalle: 'Cl' },
+  { posicion: 18, nombre: 'Argon', precio: 39.948, detalle: 'Ar' },
+  { posicion: 19, nombre: 'Potassium', precio: 39.0983, detalle: 'K' },
+  { posicion: 20, nombre: 'Calcium', precio: 40.078, detalle: 'Ca' },
+];
+
+export class MyDataSource extends DataSource<any> {
+  constructor(private afs: AngularFirestore) {
+    super();
+  }
+  connect(): Observable<any[]> {
+    return this.afs.collection('products').valueChanges();
+  }
+
+  disconnect() { }
+}
+
+export class FilterDataSource extends DataSource<any> {
+  constructor(private afs: AngularFirestore) {
+    super();
+  }
+  connect(): Observable<any[]> {
+
+    return this.afs.collection<Account[]>('accounts').snapshotChanges().pipe(map((accounts) => {
+      return accounts.map(a => {
+        const data = a[0].payload.doc.data() as Account;
+        const id = a.payload.doc.id;
+        return { id, ...data }
       });
-    } else {
-      this.ds.updateProduct(key, data).then(() => {
-        this.currentStatus = 1;
-        this.cleraForm();
-        console.log('Documento editado exitosamente');
-      }, (error) => {
-        console.log(error);
-      });
-    }
+    }));
+
+    //return this.afs.collection('products').valueChanges();
   }
 
-  private cleraForm() {
-    this.newProductForm.setValue({
-      nombre: '',
-      precio: 0.00,
-      detalle: ''
-    });
-  }
-
-  public editProduct(key) {
-    let editSubscribe = this.ds.getProduct(key).subscribe((product) => {
-      this.currentStatus = 2;
-      this.key = key;
-      this.newProductForm.setValue({
-        id: key,
-        nombre: product.payload.data().nombre,
-        precio: product.payload.data().precio,
-        detalle: product.payload.data().detalle
-      });
-      editSubscribe.unsubscribe();
-    });
-  }
-
-  public deleteProduct(documentId) {
-    this.ds.deleteProduct(documentId).then(() => {
-      console.log('Documento eliminado!');
-    }, (error) => {
-      console.error(error);
-    });
-  }
+  disconnect() { }
 }
