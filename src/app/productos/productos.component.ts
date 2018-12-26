@@ -4,7 +4,7 @@ import { Producto } from '../data/producto';
 import { DataService } from '../data/data.service';
 import { DataSource } from '@angular/cdk/table';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { Observable , Subject} from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 
@@ -18,13 +18,13 @@ import { map } from 'rxjs/operators';
 })
 
 export class ProductosComponent {
- 
+
   displayedColumns = ['posicion', 'nombre', 'precio', 'detalle'];
-  dataSource:MatTableDataSource<any>; 
+  dataSource: MatTableDataSource<any>;
   //dataSource = new MatTableDataSource(ELEMENT_DATA);
   constructor(private afs: AngularFirestore) { }
 
- 
+
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -34,14 +34,12 @@ export class ProductosComponent {
   */
   ngAfterViewInit() {
 
-      this.afs.collection<any>('products').valueChanges().subscribe(data => {
-        this.dataSource = new MatTableDataSource(data); 
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-      })
-    }
-
-
+    this.afs.collection<any>('products').valueChanges().subscribe(data => {
+      this.dataSource = new MatTableDataSource(data);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    })
+  }
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace

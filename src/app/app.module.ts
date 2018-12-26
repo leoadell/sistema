@@ -35,9 +35,10 @@ import { ProveedoresComponent } from './proveedores/proveedores.component';
 
 import { AngularFireModule } from 'angularfire2';
 // import { AngularFireDatabaseModule } from 'angularfire2/database';
-import{AngularFirestoreModule} from 'angularfire2/firestore';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { environment } from '../environments/environment';
+import { EditProductosComponent } from './productos/edit-productos/edit-productos.component';
 
 
 const appRoutes: Routes = [
@@ -58,7 +59,8 @@ const appRoutes: Routes = [
     ThirdPageComponent,
     ProductosComponent,
     ClientesComponent,
-    ProveedoresComponent
+    ProveedoresComponent,
+    EditProductosComponent
   ],
   imports: [
     BrowserModule,
