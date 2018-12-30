@@ -37,15 +37,6 @@ export class ProductosComponent {
 
     this.afs.collection<any>('products').valueChanges().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
-
-      this.dataSource.sortingDataAccessor = (data: any, sortHeaderId: string): string => {
-        if (typeof data[sortHeaderId] === 'string') {
-          return data[sortHeaderId].toLocaleLowerCase();
-        }
-
-        return data[sortHeaderId];
-      }
-
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     })
