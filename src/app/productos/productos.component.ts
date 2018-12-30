@@ -6,6 +6,7 @@ import { DataSource } from '@angular/cdk/table';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AddProductosComponent } from './add-productos/add-productos.component';
 
 
 /**
@@ -22,8 +23,8 @@ export class ProductosComponent {
   displayedColumns = ['posicion', 'nombre', 'precio', 'detalle', 'actions'];
   dataSource: MatTableDataSource<any>;
 
-  //dataSource = new MatTableDataSource(ELEMENT_DATA);
-  constructor(private afs: AngularFirestore) { }
+  tempDataService: DataService;
+  constructor(private afs: AngularFirestore, public dialog: MatDialog, public dataService: DataService) { }
 
 
   @ViewChild(MatSort) sort: MatSort;
@@ -42,22 +43,26 @@ export class ProductosComponent {
     })
   }
 
-  // addNew(producto:Producto) {
-  //   const dialogRef = this.dialog.open(AddDialogComponent, {
-  //     data: {issue: issue }
-  //   });
+  addNew(producto: Producto) {
+    const dialogRef = this.dialog.open(AddProductosComponent, {
+      data: { producto: Producto }
+    });
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     if (result === 1) {
-  //       // After dialog is closed we're doing frontend updates
-  //       // For add we're just pushing a new row inside DataService
-  //       this.exampleDatabase.dataChange.value.push(this.dataService.getDialogData());
-  //       this.refreshTable();
-  //     }
-  //   });
-  // }
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 1) {
+        // After dialog is closed we're doing frontend updates
+        // For add we're just pushing a new row inside DataService
+        this.tempDataService.dataChange.value.push(this.dataService.getDialogData());
+        this.refreshTable();
+      }
+    });
+  }
 
-
+  private refreshTable() {
+    //refresca la tabla usando el paginador, seteando el mismo numero de pagesize.
+    // https://github.com/marinantonio/angular-mat-table-crud/issues/12
+    this.paginator._changePageSize(this.paginator.pageSize);
+  }
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
