@@ -19,8 +19,9 @@ import { map } from 'rxjs/operators';
 
 export class ProductosComponent {
 
-  displayedColumns = ['posicion', 'nombre', 'precio', 'detalle'];
+  displayedColumns = ['posicion', 'nombre', 'precio', 'detalle', 'actions'];
   dataSource: MatTableDataSource<any>;
+
   //dataSource = new MatTableDataSource(ELEMENT_DATA);
   constructor(private afs: AngularFirestore) { }
 
@@ -50,6 +51,20 @@ export class ProductosComponent {
     })
   }
 
+  // addNew(producto:Producto) {
+  //   const dialogRef = this.dialog.open(AddDialogComponent, {
+  //     data: {issue: issue }
+  //   });
+
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     if (result === 1) {
+  //       // After dialog is closed we're doing frontend updates
+  //       // For add we're just pushing a new row inside DataService
+  //       this.exampleDatabase.dataChange.value.push(this.dataService.getDialogData());
+  //       this.refreshTable();
+  //     }
+  //   });
+  // }
 
 
   applyFilter(filterValue: string) {
@@ -70,7 +85,7 @@ export class ProductosComponent {
 
 
 
-const ELEMENT_DATA: Producto[] = [
+/* const ELEMENT_DATA: Producto[] = [
   { posicion: 1, nombre: 'Hilo Nego', precio: 35, detalle: 'Hilo negro de 10mts' },
   { posicion: 2, nombre: 'Elastico ancho', precio: 8, detalle: 'Elastico para bebe' },
   { posicion: 3, nombre: 'Lithium', precio: 6.941, detalle: 'Li' },
@@ -92,7 +107,7 @@ const ELEMENT_DATA: Producto[] = [
   { posicion: 19, nombre: 'Potassium', precio: 39.0983, detalle: 'K' },
   { posicion: 20, nombre: 'Calcium', precio: 40.078, detalle: 'Ca' },
 ];
-
+ */
 export class MyDataSource extends DataSource<any> {
   constructor(private afs: AngularFirestore) {
     super();
