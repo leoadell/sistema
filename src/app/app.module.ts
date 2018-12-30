@@ -39,6 +39,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { environment } from '../environments/environment';
 import { EditProductosComponent } from './productos/edit-productos/edit-productos.component';
+import { AddProductosComponent } from './productos/add-productos/add-productos.component';
 
 
 const appRoutes: Routes = [
@@ -60,7 +61,8 @@ const appRoutes: Routes = [
     ProductosComponent,
     ClientesComponent,
     ProveedoresComponent,
-    EditProductosComponent
+    EditProductosComponent,
+    AddProductosComponent
   ],
   imports: [
     BrowserModule,
