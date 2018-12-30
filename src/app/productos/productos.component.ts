@@ -57,7 +57,7 @@ export class ProductosComponent {
       }
     });
   }
-
+  
   private refreshTable() {
     //refresca la tabla usando el paginador, seteando el mismo numero de pagesize.
     // https://github.com/marinantonio/angular-mat-table-crud/issues/12

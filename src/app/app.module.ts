@@ -22,6 +22,7 @@ import {
   MatInputModule,
   MatProgressSpinnerModule,
   MatFormFieldModule,
+  MatDialogModule,
 }
   from '@angular/material';
 
@@ -58,11 +59,11 @@ const appRoutes: Routes = [
     FirstPageComponent,
     SecondPageComponent,
     ThirdPageComponent,
+    AddProductosComponent,
     ProductosComponent,
     ClientesComponent,
     ProveedoresComponent,
     EditProductosComponent,
-    AddProductosComponent
   ],
   imports: [
     BrowserModule,
@@ -81,10 +82,14 @@ const appRoutes: Routes = [
     MatSortModule,
     MatPaginatorModule,
     MatInputModule,
+    MatDialogModule,
     MatProgressSpinnerModule,
     AngularFireModule.initializeApp(environment.firebase),
     //AngularFireDatabaseModule,
     AngularFirestoreModule.enablePersistence(),
+  ],
+  entryComponents:[
+AddProductosComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
