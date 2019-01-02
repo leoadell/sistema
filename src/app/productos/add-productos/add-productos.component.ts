@@ -36,7 +36,7 @@ export class AddProductosComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  public confirmAdd(): void {
+  public confirmAdd(): void {    
     this.dataService.createProduct(this.data);
   }
 }

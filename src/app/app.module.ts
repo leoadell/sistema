@@ -41,6 +41,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { environment } from '../environments/environment';
 import { EditProductosComponent } from './productos/edit-productos/edit-productos.component';
 import { AddProductosComponent } from './productos/add-productos/add-productos.component';
+import { FormsModule } from '@angular/forms';
 
 
 const appRoutes: Routes = [
@@ -70,6 +71,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
     LayoutModule,
+    FormsModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,

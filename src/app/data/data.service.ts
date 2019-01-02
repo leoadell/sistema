@@ -13,7 +13,7 @@ export class DataService {
   ) { }
 
   //Crea un nuevo objeto
-  public createProduct(producto: any) {
+  public createProduct(producto: Producto) {
     return this.db.collection('productos').add(producto);
   }
 

@@ -36,7 +36,7 @@ export class ProductosComponent {
   */
   ngAfterViewInit() {
 
-    this.afs.collection<any>('products').valueChanges().subscribe(data => {
+    this.afs.collection<any>('productos').valueChanges().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
