@@ -8,9 +8,9 @@
   <mat-table #table [dataSource]="dataSource" matSort>
 
     <!-- Position Column -->
-    <ng-container matColumnDef="posicion">
+    <ng-container matColumnDef="codigo">
       <mat-header-cell *matHeaderCellDef mat-sort-header> No. </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.posicion}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.codigo}} </mat-cell>
     </ng-container>
 
     <!-- Name Column -->

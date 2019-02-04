@@ -20,7 +20,7 @@ import { AddProductosComponent } from './add-productos/add-productos.component';
 
 export class ProductosComponent {
 
-  displayedColumns = ['posicion', 'nombre', 'precio', 'detalle', 'actions'];
+  displayedColumns = ['codigo', 'nombre', 'precio', 'detalle', 'actions'];
   dataSource: MatTableDataSource<any>;
 
   tempDataService: DataService;

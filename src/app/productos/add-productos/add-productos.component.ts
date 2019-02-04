@@ -16,7 +16,7 @@ export class AddProductosComponent implements OnInit {
 
   ngOnInit() {
   }
-  
+
   formControl = new FormControl('', [
     Validators.required
     // Validators.email,
@@ -36,7 +36,13 @@ export class AddProductosComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  public confirmAdd(): void {    
-    this.dataService.createProduct(this.data);
+  public confirmAdd(): void {
+    const prod = {
+      codigo: this.data.codigo,
+      nombre: this.data.nombre,
+      precio: this.data.precio,
+      detalle: this.data.detalle
+    }
+    this.dataService.createProduct(prod);
   }
 }
