@@ -1,11 +1,11 @@
 <div class="container">
   <h3 mat-dialog-title>Agregar Producto</h3>
 
-  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm"></form>
+  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
 
   <div class="form">
     <mat-form-field color="accent">
-      <input matInput #input class="form-control" placeholder="Codigo" [(ngModel)]="data.codigo" name="codigo" required>
+      <input matInput #input class="form-control" type="number" placeholder="Codigo" [(ngModel)]="data.codigo" name="codigo" required>
       <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
     </mat-form-field>
   </div>
@@ -19,7 +19,7 @@
 
   <div class="form">
     <mat-form-field color="accent">
-      <input matInput #input class="form-control" placeholder="Precio" [(ngModel)]="data.precio" name="precio" required>
+      <input matInput #input class="form-control" type="number" placeholder="Precio" [(ngModel)]="data.precio" name="precio" required>
       <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
     </mat-form-field>
   </div>
@@ -35,4 +35,5 @@
     <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="confirmAdd()">Guardar</button>
     <button mat-button (click)="onNoClick()" tabindex="-1">Cancelar</button>
   </div>
+</form>
 </div>
