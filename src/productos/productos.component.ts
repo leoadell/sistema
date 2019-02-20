@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatSort, MatDialog } from '@angular/material';
-import { Producto } from '../data/producto';
-import { DataService } from '../data/data.service';
+import { Producto } from '../app/data/producto';
+import { DataService } from '../app/data/data.service';
 import { DataSource } from '@angular/cdk/table';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable, Subject } from 'rxjs';

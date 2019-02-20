@@ -1,0 +1,65 @@
+<div class="example-header">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+  </mat-form-field>
+
+</div>
+<div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="codigo">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> No. </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.codigo}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="nombre">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.nombre}} </mat-cell>
+    </ng-container>
+
+    <!-- precio Column -->
+    <ng-container matColumnDef="precio">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> precio </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.precio}} </mat-cell>
+    </ng-container>
+
+    <!-- detalle Column -->
+    <ng-container matColumnDef="detalle">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> detalle </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.detalle}} </mat-cell>
+    </ng-container>
+
+    <!-- acciones -->
+    <ng-container matColumnDef="actions">
+      <!-- <mat-header-cell *matHeaderCellDef mat-sort-header> Acciones </mat-header-cell>
+ -->
+      <mat-header-cell *matHeaderCellDef>
+        <button mat-fab color="primary" (click)="addNew()">
+          <mat-icon aria-label="Example icon-button with a hear icon">add</mat-icon>
+        </button>
+      </mat-header-cell>
+
+      <mat-cell *matCellDef="let element; let i=index;">
+        <button mat-icon-button color="accent" (click)="startEdit(i, element)">
+          <mat-icon aria-label="Edit">edit</mat-icon>
+        </button>
+
+        <button mat-icon-button color="accent" (click)="deleteItem(i,element)">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- header rows -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
+<!-- <div style=" z-index:5;position:fixed; display:flex; align-self:flex-end; bottom:10%; margin-bottom:-50px;">
+  <button mat-fab color="primary" (click)="addNew()">
+    <mat-icon aria-label="Example icon-button with a hear icon">add</mat-icon>
+  </button>
+</div> -->
