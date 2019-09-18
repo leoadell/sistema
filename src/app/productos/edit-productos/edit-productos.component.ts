@@ -1,20 +1,23 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormControl, Validators } from '@angular/forms';
 import { DataService } from 'src/app/data/data.service';
+import { Producto } from 'src/app/data/producto';
 
 @Component({
-  selector: 'edit-productos',
+  selector: 'app-baza',
   templateUrl: './edit-productos.component.html',
   styleUrls: ['./edit-productos.component.css']
 })
-export class EditProductosComponent implements OnInit {
+export class EditProductosComponent {
 
   constructor(public dialogRef: MatDialogRef<EditProductosComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, public dataService: DataService) { }
+    @Inject(MAT_DIALOG_DATA) public data: Producto, public dataService: DataService) {
+      console.log("openng dialog component");
 
-  ngOnInit() {
   }
+
+
   formControl = new FormControl('', [
     Validators.required
   ]);
@@ -32,7 +35,7 @@ export class EditProductosComponent implements OnInit {
   }
 
   stopEdit(): void {
-    this.dataService.updateProduct("1", this.data)
+    this.dataService.updateProduct(this.data.nombre, this.data)
   }
 
 }

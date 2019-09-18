@@ -42,7 +42,8 @@
       </mat-header-cell>
 
       <mat-cell *matCellDef="let element; let i=index;">
-        <button mat-icon-button color="accent" (click)="startEdit(i, element)">
+        <button mat-icon-button color="accent"
+          (click)="startEdit(i, element.codigo,element.nombre, element.precio, element.detalle)">
           <mat-icon aria-label="Edit">edit</mat-icon>
         </button>
 

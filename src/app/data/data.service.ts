@@ -14,6 +14,21 @@ export class DataService {
 
   //Crea un nuevo objeto
   public createProduct(producto: Producto) {
+/*
+this.tempId = this.angularFireStore.createId();
+
+const newCountry = {
+      id:this.tempId,
+      name:'Karachi'
+      //other fields...
+    }
+
+this.angularFireStore.collection('Countries').doc(this.tempId).set(newCountry).then(res => {
+  console.log('country added')
+}).catch(err => {
+  console.log('error adding country',err)
+}); */
+
     return this.db.collection('productos').add(producto);
   }
 

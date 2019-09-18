@@ -22,7 +22,8 @@ import { EditProductosComponent } from './edit-productos/edit-productos.componen
 
 export class ProductosComponent {
 
-  displayedColumns = ['codigo', 'nombre', 'precio', 'detalle', 'actions'];
+  displayedColumns = ['codigo', 'nombre', 'precio', 'actions'];
+  //displayedColumns = ['codigo', 'nombre', 'precio', 'detalle', 'actions'];
   dataSource: MatTableDataSource<any>;
 
   tempDataService: DataService;
@@ -60,13 +61,13 @@ export class ProductosComponent {
     });
   }
 
-  startEdit(i: number, element: Producto ) {
+  startEdit(i: number, codigo: number, nombre: string, precio: number, detalle: string) {
     // this.id = id;
     // index row is used just for debugging proposes and can be removed
     // this.index = i;
     // console.log(this.index);
     const dialogRef = this.dialog.open(EditProductosComponent, {
-      data: {i, element}
+      data: { codigo: codigo, nombre: nombre, precio: precio}//, detalle: detalle }
     });
 
     dialogRef.afterClosed().subscribe(result => {
