@@ -42,6 +42,7 @@ import { environment } from '../environments/environment';
 import { EditProductosComponent } from './productos/edit-productos/edit-productos.component';
 import { AddProductosComponent } from './productos/add-productos/add-productos.component';
 import { FormsModule } from '@angular/forms';
+import { DeleteProductsComponent } from './productos/delete-products/delete-products.component';
 
 
 const appRoutes: Routes = [
@@ -65,6 +66,7 @@ const appRoutes: Routes = [
     ClientesComponent,
     ProveedoresComponent,
     EditProductosComponent,
+    DeleteProductsComponent,
   ],
   imports: [
     BrowserModule,

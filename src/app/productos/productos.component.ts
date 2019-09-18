@@ -22,7 +22,7 @@ import { EditProductosComponent } from './edit-productos/edit-productos.componen
 
 export class ProductosComponent {
 
-  displayedColumns = ['codigo', 'nombre', 'precio', 'actions'];
+  displayedColumns = [ 'nombre', 'precio', 'actions'];
   //displayedColumns = ['codigo', 'nombre', 'precio', 'detalle', 'actions'];
   dataSource: MatTableDataSource<any>;
 
@@ -67,7 +67,7 @@ export class ProductosComponent {
     // this.index = i;
     // console.log(this.index);
     const dialogRef = this.dialog.open(EditProductosComponent, {
-      data: { codigo: codigo, nombre: nombre, precio: precio}//, detalle: detalle }
+      data: { codigo: codigo, nombre: nombre, precio: precio, detalle: detalle }
     });
 
     dialogRef.afterClosed().subscribe(result => {
