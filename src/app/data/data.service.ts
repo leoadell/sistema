@@ -48,8 +48,8 @@ this.angularFireStore.collection('Countries').doc(this.tempId).set(newCountry).t
   }
 
   //Borra un objeto
-  deleteProduct(key: string) {
-    return this.db.collection('productos').doc(key).delete();
+  deleteProduct(producto: Producto) {
+    return this.db.collection('productos').doc(producto.codigo.toString()).delete();
   }
 
   dataChange: BehaviorSubject<Producto[]> = new BehaviorSubject<Producto[]>([]);

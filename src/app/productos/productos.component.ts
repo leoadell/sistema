@@ -8,6 +8,7 @@ import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AddProductosComponent } from './add-productos/add-productos.component';
 import { EditProductosComponent } from './edit-productos/edit-productos.component';
+import { DeleteProductsComponent } from './delete-products/delete-products.component';
 
 
 
@@ -82,22 +83,22 @@ export class ProductosComponent {
     });
   }
 
-  // deleteItem(i: number, id: number, title: string, state: string, url: string) {
-  //   this.index = i;
-  //   this.id = id;
-  //   const dialogRef = this.dialog.open(DeleteDialogComponent, {
-  //     data: {id: id, title: title, state: state, url: url}
-  //   });
+  deleteItem(i: number, codigo: number, nombre: string, precio: number, detalle: string) {
+    //this.index = i;
+    //this.id = id;
+    const dialogRef = this.dialog.open(DeleteProductsComponent, {
+      data: {codigo: codigo, nombre: nombre, precio: precio, detalle: detalle}
+    });
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     if (result === 1) {
-  //       const foundIndex = this.exampleDatabase.dataChange.value.findIndex(x => x.id === this.id);
-  //       // for delete we use splice in order to remove single object from DataService
-  //       this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
-  //       this.refreshTable();
-  //     }
-  //   });
-  // }
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 1) {
+        this.refreshTable();
+      }
+    });
+  }
+
+
+
 
   private refreshTable() {
     //refresca la tabla usando el paginador, seteando el mismo numero de pagesize.

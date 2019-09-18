@@ -94,7 +94,8 @@ const appRoutes: Routes = [
   ],
   entryComponents: [
     AddProductosComponent,
-    EditProductosComponent
+    EditProductosComponent,
+    DeleteProductsComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

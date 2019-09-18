@@ -47,7 +47,7 @@
           <mat-icon aria-label="Edit">edit</mat-icon>
         </button>
 
-        <button mat-icon-button color="accent" (click)="deleteItem(i,element)">
+        <button mat-icon-button color="accent" (click)="deleteItem(i, element.codigo,element.nombre, element.precio, element.detalle)">
           <mat-icon aria-label="Delete">delete</mat-icon>
         </button>
       </mat-cell>
