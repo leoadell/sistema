@@ -46,7 +46,7 @@ export class AddProductosComponent implements OnInit {
     this.dataService.createProduct(prod);
   }
 
-  public confirmFill(): void {
+ /*  public confirmFill(): void {
     var csvjson = [
       {
         "CODIGO": 87566,
@@ -2866,5 +2866,5 @@ export class AddProductosComponent implements OnInit {
       }
       this.dataService.createProduct(prod);
     }
-  }
+  } */
 }
